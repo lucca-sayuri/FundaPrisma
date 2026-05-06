@@ -13,6 +13,11 @@ mainRouter.post('/user', async (req, res) => {
         name: 'John Doe',
         email:  'johndoe@example.com'
     })
+    if (user) {
+        res.status(201)
+    } else {
+        res.status(400)
+    }
 
     res.json(user)
 })
