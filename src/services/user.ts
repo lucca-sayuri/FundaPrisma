@@ -8,13 +8,6 @@ type CreateUserProps = {
 
 export const createUser = async (data: Prisma.UserCreateInput) => {
     try {
-        //     const user = await prisma.user.create({
-        //     data: {
-        //         name,
-        //         email
-        //     }
-        // })
-
         return await prisma.user.create({ data })
     } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -35,6 +28,22 @@ export const createUsers = async (users: Prisma.UserCreateInput[]) => {
         })
     } catch(error) {
         console.log('Error creating users:', error)
+        return false
+    }
+}
+
+export const getAllUsers = async () => {
+    try {
+        return await prisma.user.findMany({
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                status: true
+            }
+        })
+    } catch (error) {
+        console.log('Error catching users:', error)
         return false
     }
 }
