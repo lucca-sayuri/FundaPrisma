@@ -47,3 +47,20 @@ export const getAllUsers = async () => {
         return false
     }
 }
+
+export const getUserByEmail = async (email: string) => {
+    try {
+        return await prisma.user.findUnique({
+            where: { email },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                status: true
+            }
+        })
+    } catch (error) {
+        console.log('Error fetching user by email:', error)
+        return false
+    }
+}
